@@ -4,7 +4,7 @@ package com.ajsw.javausersservice.models.dto.response;
 import lombok.Getter;
 import lombok.Setter;
 
-public class InstructorResponse {
+public class InstructorResponse extends Response {
     @Getter
     @Setter
     public Integer id;

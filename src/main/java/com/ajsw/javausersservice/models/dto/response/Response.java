@@ -1,8 +1,10 @@
-package com.ajsw.javausersservice.models.dto;
+package com.ajsw.javausersservice.models.dto.response;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Response {
     @Getter
     @Setter

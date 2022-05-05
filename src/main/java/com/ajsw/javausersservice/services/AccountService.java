@@ -1,5 +1,7 @@
 package com.ajsw.javausersservice.services;
 
+import com.ajsw.javausersservice.models.dto.response.EntityCreatedResponse;
+import com.ajsw.javausersservice.models.dto.response.Response;
 import com.ajsw.javausersservice.models.entity.Account;
 import com.ajsw.javausersservice.repositories.interfaces.IAccountRepository;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -15,10 +17,11 @@ public class AccountService {
         accountRepository = iAccountRepository;
     }
 
-    public Account saveAccount(Account account){
-        String sha256hex = DigestUtils.sha256Hex(account.getPassword());
-        account.setPassword(sha256hex);
-        Account response = accountRepository.save(account);
+    public Response saveAccount(Account account){
+        String hashPassword = DigestUtils.sha256Hex(account.getPassword());
+        account.setPassword(hashPassword);
+        Account accountCreated = accountRepository.save(account);
+        EntityCreatedResponse response = new EntityCreatedResponse(accountCreated.getIdAccount(), 200, "Account created successfully.");
         return response;
     }
 

@@ -1,5 +1,7 @@
 package com.ajsw.javausersservice.services;
 
+import com.ajsw.javausersservice.models.dto.response.EntityCreatedResponse;
+import com.ajsw.javausersservice.models.dto.response.Response;
 import com.ajsw.javausersservice.models.entity.Client;
 import com.ajsw.javausersservice.repositories.interfaces.IClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +16,10 @@ public class ClientService {
         clientRepository = iClientRepository;
     }
 
-    public Client saveClient(Client client){
-        return clientRepository.save(client);
+    public Response saveClient(Client client){
+        Client clientCreated = clientRepository.save(client);
+        EntityCreatedResponse response = new EntityCreatedResponse(clientCreated.getIdPerson(), 200, "Client created successfully");
+        return response;
     }
 
     public Client getClientById(Long id){

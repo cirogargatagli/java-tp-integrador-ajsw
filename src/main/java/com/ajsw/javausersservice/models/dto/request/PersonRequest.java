@@ -3,7 +3,7 @@ package com.ajsw.javausersservice.models.dto.request;
 import lombok.Getter;
 import lombok.Setter;
 
-public class PersonRequestAccount {
+public class PersonRequest {
     @Getter
     @Setter
     private String firstName;
