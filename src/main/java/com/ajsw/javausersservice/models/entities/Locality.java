@@ -1,10 +1,15 @@
-package com.ajsw.javausersservice.models.entity;
+package com.ajsw.javausersservice.models.entities;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "locality", schema = "public", catalog = "d9sp9r36nrg2j2")
+@Table(name = "locality")
 public class Locality {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -13,6 +18,9 @@ public class Locality {
     @Basic
     @Column(name = "name")
     private String name;
+    @Basic
+    @Column(name = "postal_code")
+    private String postalCode;
 
     public int getIdLocality() {
         return idLocality;
@@ -30,16 +38,11 @@ public class Locality {
         this.name = name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Locality that = (Locality) o;
-        return idLocality == that.idLocality && Objects.equals(name, that.name);
+    public String getPostalCode() {
+        return postalCode;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(idLocality, name);
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 }

@@ -15,4 +15,8 @@ public class PersonRequest {
     @Getter
     @Setter
     private String phone;
+
+    @Getter
+    @Setter
+    private int idAccount;
 }

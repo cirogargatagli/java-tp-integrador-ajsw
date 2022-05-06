@@ -2,7 +2,7 @@ package com.ajsw.javausersservice.services;
 
 import com.ajsw.javausersservice.models.dto.response.EntityCreatedResponse;
 import com.ajsw.javausersservice.models.dto.response.Response;
-import com.ajsw.javausersservice.models.entity.Account;
+import com.ajsw.javausersservice.models.entities.Account;
 import com.ajsw.javausersservice.repositories.interfaces.IAccountRepository;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class AccountService {
         return response;
     }
 
-    public Account getAccountById(Long id){
+    public Account getAccountById(int id){
         return accountRepository.findById(id).get();
     }
 }

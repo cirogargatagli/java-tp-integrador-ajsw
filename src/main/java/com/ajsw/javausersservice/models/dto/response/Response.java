@@ -13,4 +13,9 @@ public class Response {
     @Getter
     @Setter
     public String message;
+
+    public Response() {
+        this.statusCode = statusCode;
+        this.message = message;
+    }
 }

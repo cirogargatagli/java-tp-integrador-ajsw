@@ -1,6 +1,6 @@
 package com.ajsw.javausersservice.services;
 
-import com.ajsw.javausersservice.models.entity.Role;
+import com.ajsw.javausersservice.models.entities.Role;
 import com.ajsw.javausersservice.repositories.interfaces.IRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

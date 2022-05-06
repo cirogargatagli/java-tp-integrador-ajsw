@@ -1,15 +1,23 @@
-package com.ajsw.javausersservice.models.entity;
+package com.ajsw.javausersservice.models.entities;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "role", schema = "public", catalog = "d9sp9r36nrg2j2")
-public class Role {
+@Table(name = "role")
+public class Role implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_role")
     private int idRole;
+
     @Basic
     @Column(name = "description")
     private String description;
@@ -28,18 +36,5 @@ public class Role {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Role that = (Role) o;
-        return idRole == that.idRole && Objects.equals(description, that.description);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idRole, description);
     }
 }

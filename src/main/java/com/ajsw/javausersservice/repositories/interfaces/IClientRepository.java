@@ -1,6 +1,6 @@
 package com.ajsw.javausersservice.repositories.interfaces;
 
-import com.ajsw.javausersservice.models.entity.Client;
+import com.ajsw.javausersservice.models.entities.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

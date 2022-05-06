@@ -9,6 +9,7 @@ public class EntityCreatedResponse extends Response{
     public int id;
 
     public EntityCreatedResponse() {
+        super();
     }
 
     public EntityCreatedResponse(int id, int statusCode, String message) {

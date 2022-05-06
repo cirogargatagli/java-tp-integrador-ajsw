@@ -1,10 +1,10 @@
-package com.ajsw.javausersservice.models.entity;
+package com.ajsw.javausersservice.models.entities;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "activity", schema = "public", catalog = "d9sp9r36nrg2j2")
+@Table(name = "activity")
 public class Activity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -34,8 +34,8 @@ public class Activity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Activity that = (Activity) o;
-        return idActivity == that.idActivity && Objects.equals(description, that.description);
+        Activity activity = (Activity) o;
+        return idActivity == activity.idActivity && Objects.equals(description, activity.description);
     }
 
     @Override

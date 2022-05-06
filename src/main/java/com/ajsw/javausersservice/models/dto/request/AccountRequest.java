@@ -1,5 +1,6 @@
 package com.ajsw.javausersservice.models.dto.request;
 
+import com.ajsw.javausersservice.models.entities.Role;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,5 +19,5 @@ public class AccountRequest {
 
     @Getter
     @Setter
-    private Integer id_role;
+    private Role role;
 }
