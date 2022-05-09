@@ -8,5 +8,5 @@ import lombok.Setter;
 public class ClientRequest extends PersonRequest{
     @Getter
     @Setter
-    public Address address;
+    public int id_address;
 }

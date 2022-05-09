@@ -19,5 +19,5 @@ public class AccountRequest {
 
     @Getter
     @Setter
-    private Role role;
+    private int id_role;
 }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@RequestMapping("/api/account")
+@RequestMapping("/api/accounts")
 public class AccountController {
     private final AccountService accountService;
 
@@ -26,13 +26,7 @@ public class AccountController {
     @PostMapping()
     public Response createAccount(@Validated @RequestBody AccountRequest accountRequest){
         try {
-            Account account = new Account(
-                    accountRequest.getEmail(),
-                    accountRequest.getPassword(),
-                    accountRequest.isActive(),
-                    accountRequest.getRole()
-            );
-            return accountService.saveAccount(account);
+            return accountService.saveAccount(accountRequest);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "BAD REQUEST\n");
         }

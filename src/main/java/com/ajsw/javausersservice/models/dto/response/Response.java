@@ -15,6 +15,10 @@ public class Response {
     public String message;
 
     public Response() {
+
+    }
+
+    public Response(int statusCode, String message) {
         this.statusCode = statusCode;
         this.message = message;
     }

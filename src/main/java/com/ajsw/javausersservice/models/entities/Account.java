@@ -44,6 +44,10 @@ public class Account implements Serializable {
         this.role = role;
     }
 
+    public Account(int idAccount) {
+        this.idAccount = idAccount;
+    }
+
     public Account() {
 
     }

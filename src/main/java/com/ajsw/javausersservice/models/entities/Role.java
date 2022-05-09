@@ -22,6 +22,14 @@ public class Role implements Serializable {
     @Column(name = "description")
     private String description;
 
+    public Role(int idRole){
+        this.idRole = idRole;
+    }
+
+    public Role() {
+
+    }
+
     public int getIdRole() {
         return idRole;
     }

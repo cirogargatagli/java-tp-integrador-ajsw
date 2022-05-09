@@ -20,6 +20,14 @@ public class Address {
     @JoinColumn(name = "id_locality")
     private Locality locality;
 
+    public Address(int idAddress) {
+        this.idAddress = idAddress;
+    }
+
+    public Address() {
+
+    }
+
     public int getIdAddress() {
         return idAddress;
     }

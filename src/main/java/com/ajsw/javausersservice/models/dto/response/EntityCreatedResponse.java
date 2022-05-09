@@ -12,9 +12,8 @@ public class EntityCreatedResponse extends Response{
         super();
     }
 
-    public EntityCreatedResponse(int id, int statusCode, String message) {
-        this.statusCode = statusCode;
-        this.message = message;
+    public EntityCreatedResponse(int id, String nameEntity) {
+        super(201, nameEntity + " created succesfully");
         this.id = id;
     }
 }
