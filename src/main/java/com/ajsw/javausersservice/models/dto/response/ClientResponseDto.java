@@ -4,7 +4,5 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class ClientResponseDto extends PersonResponseDto {
-    @Getter
-    @Setter
-    public AddressResponseDto address;
+
 }

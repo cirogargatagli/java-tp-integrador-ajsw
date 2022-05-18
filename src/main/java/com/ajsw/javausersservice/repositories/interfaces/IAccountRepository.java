@@ -8,4 +8,5 @@ import java.io.Serializable;
 
 @Repository
 public interface IAccountRepository extends JpaRepository<Account, Integer> {
+    Account getAccountByEmailAndPassword(String email, String password);
 }

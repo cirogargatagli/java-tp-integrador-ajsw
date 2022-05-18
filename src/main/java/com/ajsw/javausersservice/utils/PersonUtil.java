@@ -2,6 +2,7 @@ package com.ajsw.javausersservice.utils;
 
 import com.ajsw.javausersservice.models.dto.request.PersonRequest;
 import com.ajsw.javausersservice.models.entities.Account;
+import com.ajsw.javausersservice.models.entities.Address;
 import com.ajsw.javausersservice.models.entities.Person;
 
 public class PersonUtil {
@@ -10,7 +11,8 @@ public class PersonUtil {
                 request.getFirstName(),
                 request.getLastName(),
                 request.getPhone(),
-                new Account(request.getIdAccount())
+                new Address(request.idAddress),
+                new Account(request.idAccount)
         );
     }
 }

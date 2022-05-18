@@ -1,5 +1,8 @@
 package com.ajsw.javausersservice.models.entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
@@ -10,30 +13,44 @@ public class Account implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_account")
+    @Getter
+    @Setter
     private int idAccount;
 
     @Basic
     @Column(name = "email", nullable = false, unique = true)
+    @Getter
+    @Setter
     private String email;
 
     @Basic
     @Column(name = "password", nullable = false)
+    @Getter
+    @Setter
     private String password;
 
     @Basic
     @Column(name = "created_at", nullable = false, columnDefinition = "date DEFAULT 'now()'")
+    @Getter
+    @Setter
     private Date createdAt = new Date(System.currentTimeMillis());
 
     @Basic
     @Column(name = "updated_at")
+    @Getter
+    @Setter
     private Date updatedAt;
 
     @Basic
     @Column(name = "active")
+    @Getter
+    @Setter
     private Boolean active;
 
     @OneToOne
     @JoinColumn(name = "id_role")
+    @Getter
+    @Setter
     private Role role;
 
     public Account(String email, String password, Boolean active, Role role) {
@@ -50,61 +67,5 @@ public class Account implements Serializable {
 
     public Account() {
 
-    }
-
-    public int getIdAccount() {
-        return idAccount;
-    }
-
-    public void setIdAccount(int idAccount) {
-        this.idAccount = idAccount;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 }

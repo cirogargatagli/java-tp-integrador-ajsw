@@ -1,6 +1,8 @@
 package com.ajsw.javausersservice.controllers;
 
 import com.ajsw.javausersservice.models.dto.request.AccountRequest;
+import com.ajsw.javausersservice.models.dto.request.LoginRequest;
+import com.ajsw.javausersservice.models.dto.response.AccountResponseDto;
 import com.ajsw.javausersservice.models.dto.response.Response;
 import com.ajsw.javausersservice.models.entities.Account;
 import com.ajsw.javausersservice.services.AccountService;
@@ -27,6 +29,15 @@ public class AccountController {
     public Response createAccount(@Validated @RequestBody AccountRequest accountRequest){
         try {
             return accountService.saveAccount(accountRequest);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "BAD REQUEST\n");
+        }
+    }
+
+    @PostMapping("/login")
+    public AccountResponseDto logIn(@Validated @RequestBody LoginRequest loginRequest){
+        try {
+            return accountService.logIn(loginRequest);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "BAD REQUEST\n");
         }

@@ -1,12 +1,11 @@
 package com.ajsw.javausersservice.models.dto.request;
 
-import com.ajsw.javausersservice.models.entities.Account;
-import com.ajsw.javausersservice.models.entities.Address;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+
 public class ClientRequest extends PersonRequest{
-    @Getter
-    @Setter
-    public int id_address;
+
 }

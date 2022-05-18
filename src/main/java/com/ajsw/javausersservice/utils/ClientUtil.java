@@ -13,8 +13,8 @@ public class ClientUtil extends PersonUtil{
                 clientRequest.getFirstName(),
                 clientRequest.getLastName(),
                 clientRequest.getPhone(),
-                new Account(clientRequest.getIdAccount()),
-                new Address(clientRequest.getId_address())
+                new Account(clientRequest.idAccount),
+                new Address(clientRequest.idAddress)
         );
     }
 }

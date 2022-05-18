@@ -18,5 +18,9 @@ public class PersonResponseDto {
 
     @Getter
     @Setter
+    public AddressResponseDto address;
+
+    @Getter
+    @Setter
     public AccountResponseDto account;
 }

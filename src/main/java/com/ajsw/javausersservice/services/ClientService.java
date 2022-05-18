@@ -56,6 +56,6 @@ public class ClientService {
     }
 
     public ClientResponseDto getClientByEmail(String email){
-        return modelMapper.map(clientRepository.findByAccount_Email(email), ClientResponseDto.class);
+        return modelMapper.map(clientRepository.findClientByAccount_Email(email), ClientResponseDto.class);
     }
 }

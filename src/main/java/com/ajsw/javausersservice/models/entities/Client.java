@@ -19,10 +19,6 @@ public class Client extends Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @OneToOne
-    @JoinColumn(name = "id_address")
-    private Address address;
-
     @JsonIdentityInfo(
             generator = ObjectIdGenerators.PropertyGenerator.class,
             property = "id_reserve"
@@ -32,20 +28,11 @@ public class Client extends Person implements Serializable {
     private List<Reserve> reserves;
 
     public Client(String firstName, String lastName, String phone, Account account, Address address) {
-        super(firstName, lastName, phone, account);
-        this.address = address;
+        super(firstName, lastName, phone, address, account);
     }
 
     public Client() {
 
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 
     public List<Reserve> getReserves() {

@@ -16,7 +16,7 @@ public class AccountUtil {
     public Account createAccount(AccountRequest accountRequest){
         return new Account(
                 accountRequest.getEmail(),
-                hashUtil.Hash256(accountRequest.getPassword()),
+                accountRequest.getPassword(),
                 accountRequest.isActive(),
                 new Role(accountRequest.getId_role())
         );
