@@ -1,6 +1,7 @@
 package com.ajsw.javausersservice.controllers;
 
 import com.ajsw.javausersservice.models.dto.request.ClientRequest;
+import com.ajsw.javausersservice.models.dto.request.PersonRequest;
 import com.ajsw.javausersservice.models.dto.response.ClientResponseDto;
 import com.ajsw.javausersservice.models.dto.response.PersonResponseDto;
 import com.ajsw.javausersservice.models.dto.response.Response;
@@ -25,6 +26,15 @@ public class PersonController {
     public PersonController(PersonService personService, RoleService roleService){
         this.personService = personService;
         this.roleService = roleService;
+    }
+
+    @PostMapping()
+    public Response createPerson(@Validated @RequestBody PersonRequest personRequest){
+        try{
+            return personService.savePerson(personRequest);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error registering the client .\n");
+        }
     }
 
     @RequestMapping(value = "/",  method = RequestMethod.GET)
