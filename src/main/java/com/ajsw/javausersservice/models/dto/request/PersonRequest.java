@@ -24,12 +24,9 @@ public class PersonRequest {
 
     @Getter
     @Setter
-    @Min(value = 1, message = "An address must be inserted")
-    public int idAddress;
+    public AddressRequest addressRequest;
 
-
-    @Min(value = 1, message = "An account must be inserted")
     @Getter
     @Setter
-    public int idAccount;
+    public AccountRequest accountRequest;
 }

@@ -42,13 +42,4 @@ public class AccountController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "BAD REQUEST\n");
         }
     }
-
-//    @PostMapping()
-//    public OAuth2ResourceServerProperties.Jwt Login(@Validated @RequestBody LoginRequest loginRequest){
-//        try {
-//
-//        } catch (Exception e) {
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "BAD REQUEST\n");
-//        }
-//    }
 }

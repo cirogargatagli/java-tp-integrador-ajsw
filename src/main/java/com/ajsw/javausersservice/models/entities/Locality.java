@@ -22,6 +22,14 @@ public class Locality {
     @Column(name = "postal_code")
     private String postalCode;
 
+    public Locality(int idLocality) {
+        this.idLocality = idLocality;
+    }
+
+    public Locality() {
+
+    }
+
     public int getIdLocality() {
         return idLocality;
     }

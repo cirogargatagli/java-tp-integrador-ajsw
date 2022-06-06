@@ -30,18 +30,18 @@ public class Person {
     protected String lastName;
 
     @Basic
-    @Column(name = "phone", unique = true)
+    @Column(name = "phone")
     @Getter
     @Setter
     protected String phone;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_address")
     @Getter
     @Setter
     private Address address;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_account")
     @Getter
     @Setter

@@ -1,11 +1,8 @@
 package com.ajsw.javausersservice.controllers;
 
-import com.ajsw.javausersservice.models.dto.request.ClientRequest;
 import com.ajsw.javausersservice.models.dto.request.PersonRequest;
-import com.ajsw.javausersservice.models.dto.response.ClientResponseDto;
 import com.ajsw.javausersservice.models.dto.response.PersonResponseDto;
 import com.ajsw.javausersservice.models.dto.response.Response;
-import com.ajsw.javausersservice.services.AccountService;
 import com.ajsw.javausersservice.services.PersonService;
 import com.ajsw.javausersservice.services.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
