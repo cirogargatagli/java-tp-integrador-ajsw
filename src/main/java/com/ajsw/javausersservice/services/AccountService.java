@@ -8,11 +8,13 @@ import com.ajsw.javausersservice.models.dto.response.Response;
 import com.ajsw.javausersservice.models.entities.Account;
 import com.ajsw.javausersservice.repositories.interfaces.IAccountRepository;
 import com.ajsw.javausersservice.utils.AccountUtil;
-import org.apache.catalina.mapper.Mapper;
+import com.ajsw.javausersservice.utils.JwtUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.ModelMap;
+
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class AccountService {
@@ -20,12 +22,14 @@ public class AccountService {
     private final AccountUtil accountUtil;
     private final String nameEntity = "Account";
     private final ModelMapper mapper;
+    private final JwtUtils jwtUtils;
 
     @Autowired
-    public AccountService(IAccountRepository accountRepository, AccountUtil accountUtil, ModelMapper mapper){
+    public AccountService(IAccountRepository accountRepository, AccountUtil accountUtil, ModelMapper mapper, JwtUtils jwtUtils){
         this.accountRepository = accountRepository;
         this.accountUtil = accountUtil;
         this.mapper = mapper;
+        this.jwtUtils = jwtUtils;
     }
 
     public Response saveAccount(AccountRequest accountRequest){
@@ -34,8 +38,15 @@ public class AccountService {
         return new EntityCreatedResponse(accountCreated.getIdAccount(), nameEntity);
     }
 
-    public AccountResponseDto logIn(LoginRequest loginRequest){
-        return mapper.map(accountRepository.getAccountByEmailAndPassword(loginRequest.email, loginRequest.password), AccountResponseDto.class);
+    public String logIn(LoginRequest loginRequest){
+        Optional<Account> accountOptional = accountRepository.getAccountByEmailAndPassword(loginRequest.email, loginRequest.password);
+        if(accountOptional.isPresent()){
+            Account existingAccount = accountOptional.get();
+            if (Objects.equals(loginRequest.password, existingAccount.getPassword())) {
+                return jwtUtils.generateToken(existingAccount);
+            }
+        }
+        throw new RuntimeException("Account invalid");
     }
 
     public Account getAccountById(int id){
