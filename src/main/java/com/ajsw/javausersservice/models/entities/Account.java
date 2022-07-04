@@ -5,7 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "account")
@@ -33,13 +33,13 @@ public class Account implements Serializable {
     @Column(name = "created_at", nullable = false, columnDefinition = "date DEFAULT 'now()'")
     @Getter
     @Setter
-    private Date createdAt = new Date(System.currentTimeMillis());
+    private Timestamp createdAt = new Timestamp(System.currentTimeMillis());
 
     @Basic
     @Column(name = "updated_at")
     @Getter
     @Setter
-    private Date updatedAt;
+    private Timestamp updatedAt;
 
     @Basic
     @Column(name = "active")
@@ -56,7 +56,7 @@ public class Account implements Serializable {
     public Account(String email, String password, Boolean active, Role role) {
         this.email = email;
         this.password = password;
-        this.createdAt = new Date(System.currentTimeMillis());
+        this.createdAt = new Timestamp(System.currentTimeMillis());
         this.active = active;
         this.role = role;
     }
