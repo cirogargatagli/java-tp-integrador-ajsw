@@ -6,6 +6,10 @@ import lombok.Setter;
 public class PersonResponseDto {
     @Getter
     @Setter
+    public int id;
+
+    @Getter
+    @Setter
     public String firstName;
 
     @Getter

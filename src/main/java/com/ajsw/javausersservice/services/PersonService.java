@@ -4,7 +4,10 @@ import com.ajsw.javausersservice.models.dto.request.PersonRequest;
 import com.ajsw.javausersservice.models.dto.response.EntityCreatedResponse;
 import com.ajsw.javausersservice.models.dto.response.PersonResponseDto;
 import com.ajsw.javausersservice.models.dto.response.Response;
+import com.ajsw.javausersservice.models.entities.Address;
+import com.ajsw.javausersservice.models.entities.Locality;
 import com.ajsw.javausersservice.models.entities.Person;
+import com.ajsw.javausersservice.models.entities.Role;
 import com.ajsw.javausersservice.models.mappers.ListMapper;
 import com.ajsw.javausersservice.repositories.interfaces.IPersonRepository;
 import com.ajsw.javausersservice.utils.PersonUtil;
@@ -13,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class PersonService {
@@ -57,5 +61,23 @@ public class PersonService {
             return getClientByEmail(email);
         }
         return null;
+    }
+
+    public Response updatePerson(PersonRequest personRequest){
+        Person person = personRepository.getPersonByAccount_Email(personRequest.accountRequest.getEmail());
+        if(!Objects.equals(person.getFirstName(), personRequest.getFirstName())) person.setFirstName(personRequest.getFirstName());
+        if(!Objects.equals(person.getLastName(), personRequest.getLastName())) person.setLastName(personRequest.getLastName());
+        if(!Objects.equals(person.getPhone(), personRequest.getPhone())) person.setPhone(personRequest.getPhone());
+        if(!Objects.equals(person.getAddress().getNumberHouse(), personRequest.getAddressRequest().getNumberHouse()))
+            person.getAddress().setNumberHouse(personRequest.addressRequest.getNumberHouse());
+        if(!Objects.equals(person.getAddress().getStreet(), personRequest.addressRequest.getStreet()))
+            person.getAddress().setStreet(personRequest.addressRequest.getStreet());
+        if(!Objects.equals(person.getAddress().getLocality().getIdLocality(), personRequest.addressRequest.getIdLocality()))
+            person.getAddress().setLocality(new Locality(personRequest.addressRequest.getIdLocality()));
+        if(!Objects.equals(person.getAccount().getEmail(), personRequest.accountRequest.getEmail()))
+            person.getAccount().setEmail(personRequest.accountRequest.getEmail());
+        if(!Objects.equals(person.getAccount().getRole().getIdRole(), personRequest.accountRequest.getId_role()))
+            person.getAccount().setRole(new Role(personRequest.accountRequest.getId_role()));
+        return new EntityCreatedResponse(personRepository.save(person).getIdPerson(), nameEntity);
     }
 }

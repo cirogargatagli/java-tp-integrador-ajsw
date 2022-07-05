@@ -6,6 +6,9 @@ import lombok.Setter;
 public class LocalityResponseDto {
     @Getter
     @Setter
+    public int id;
+    @Getter
+    @Setter
     public String name;
 
     @Getter

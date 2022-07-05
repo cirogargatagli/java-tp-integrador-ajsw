@@ -5,6 +5,8 @@ import com.ajsw.javausersservice.repositories.interfaces.IRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RoleService {
     private final IRoleRepository roleRepository;
@@ -20,5 +22,9 @@ public class RoleService {
 
     public Role getRoleById(Long id){
         return roleRepository.findById(id).get();
+    }
+
+    public List<Role> getAll(){
+        return roleRepository.findAll();
     }
 }

@@ -6,5 +6,8 @@ import lombok.Setter;
 public class RoleResponseDto {
     @Getter
     @Setter
+    public int id;
+    @Getter
+    @Setter
     public String description;
 }

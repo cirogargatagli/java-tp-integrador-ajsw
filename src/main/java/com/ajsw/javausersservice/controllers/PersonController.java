@@ -3,6 +3,7 @@ package com.ajsw.javausersservice.controllers;
 import com.ajsw.javausersservice.models.dto.request.PersonRequest;
 import com.ajsw.javausersservice.models.dto.response.PersonResponseDto;
 import com.ajsw.javausersservice.models.dto.response.Response;
+import com.ajsw.javausersservice.models.entities.Person;
 import com.ajsw.javausersservice.services.PersonService;
 import com.ajsw.javausersservice.services.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,10 @@ import java.util.List;
 @RequestMapping("/api/persons")
 public class PersonController {
     private final PersonService personService;
-    private final RoleService roleService;
 
     @Autowired
-    public PersonController(PersonService personService, RoleService roleService){
+    public PersonController(PersonService personService){
         this.personService = personService;
-        this.roleService = roleService;
     }
 
     @PostMapping()
@@ -42,5 +41,14 @@ public class PersonController {
     @RequestMapping(method = RequestMethod.GET)
     public PersonResponseDto getPerson(@RequestParam(required = false, defaultValue = "0") int id, @RequestParam(required = false) String email) {
         return personService.getPerson(id, email);
+    }
+
+    @PutMapping()
+    public Response updatePerson(@Validated @RequestBody PersonRequest personRequest){
+        try{
+            return personService.updatePerson(personRequest);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error registering the client .\n");
+        }
     }
 }
