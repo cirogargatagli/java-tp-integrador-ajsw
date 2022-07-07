@@ -2,6 +2,8 @@ package com.ajsw.javausersservice.models.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,6 +11,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "account")
+@OnDelete(action = OnDeleteAction.CASCADE)
 public class Account implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

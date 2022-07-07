@@ -33,6 +33,15 @@ public class PersonController {
         }
     }
 
+    @DeleteMapping(value="/{idUser}")
+    public Response deletePerson(@PathVariable int idUser){
+        try{
+            return personService.delete(idUser);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error delete person .\n");
+        }
+    }
+
     @RequestMapping(value = "/",  method = RequestMethod.GET)
     public List<PersonResponseDto> getPersons(){
         return personService.getPersons();

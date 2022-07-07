@@ -40,6 +40,11 @@ public class PersonService {
         return new EntityCreatedResponse(personCreated.getIdPerson(), nameEntity);
     }
 
+    public Response delete(int id){
+        personRepository.deleteById(id);
+        return new Response(200, "Delete successfully");
+    }
+
     public PersonResponseDto getPersonById(int id){
         return modelMapper.map(personRepository.findById(id), PersonResponseDto.class);
     }

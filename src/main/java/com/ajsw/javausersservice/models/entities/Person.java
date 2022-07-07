@@ -2,12 +2,15 @@ package com.ajsw.javausersservice.models.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "person")
+@OnDelete(action = OnDeleteAction.CASCADE)
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
