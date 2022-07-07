@@ -37,6 +37,9 @@ public class Course {
     @Basic
     @Column(name = "imageURL")
     private String imageURL;
+    @Basic
+    @Column(name = "capacity")
+    private int capacity;
 
     @ManyToOne
     @JoinColumn(
@@ -60,6 +63,21 @@ public class Course {
     @OneToOne
     @JoinColumn(name = "id_address")
     private Address address;
+
+    @ManyToOne
+    @JoinColumn(
+            name = "id_day",
+            referencedColumnName = "id_day",
+            foreignKey = @ForeignKey(
+                    name = "fk_course_day",
+                    foreignKeyDefinition = "FOREIGN KEY (id_day)\n" +
+                            "        REFERENCES day (id_day) MATCH SIMPLE\n" +
+                            "        ON UPDATE CASCADE\n" +
+                            "        ON DELETE CASCADE",
+                    value = ConstraintMode.CONSTRAINT
+            )
+    )
+    private Day day;
 
     @JsonIdentityInfo(
             generator = ObjectIdGenerators.PropertyGenerator.class,
@@ -116,6 +134,10 @@ public class Course {
 
     public void setImageURL(String imageURL) { this.imageURL = imageURL; }
 
+    public int getCapacity() { return capacity; }
+
+    public void setCapacity(int capacity) { this.capacity = capacity; }
+
     public Instructor getInstructor() {
         return instructor;
     }
@@ -139,4 +161,8 @@ public class Course {
     public void setAddress(Address address) {
         this.address = address;
     }
+
+    public Day getDay() { return day; }
+
+    public void setDay(Day day) { this.day = day; }
 }
