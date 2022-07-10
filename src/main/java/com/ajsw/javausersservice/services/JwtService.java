@@ -1,4 +1,4 @@
-package com.ajsw.javausersservice.utils;
+package com.ajsw.javausersservice.services;
 
 import com.ajsw.javausersservice.models.dto.JwtUserDetails;
 import com.ajsw.javausersservice.models.entities.Account;
@@ -6,12 +6,14 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
 
 @Component
-public class JwtUtils {
+public class JwtService {
 
     @Value("${jwt.private-key}")
     private String signedKey;
@@ -28,7 +30,7 @@ public class JwtUtils {
                 .compact();
     }
 
-    public JwtUserDetails validateToken(String authToken) {
+    public JwtUserDetails validateToken(String authToken, String role) {
         try {
             Claims claims = Jwts.parser().setSigningKey(signedKey).parseClaimsJws(authToken).getBody();
             Date expireTime = claims.getExpiration();
@@ -36,14 +38,18 @@ public class JwtUtils {
             if (expireTime.before(new Date(System.currentTimeMillis()))) {
                 throw new RuntimeException("token is expired");
             }
-
-            return JwtUserDetails
+            //Guardar el JwtUserDetails
+            JwtUserDetails jwtUserDetails = JwtUserDetails
                     .builder()
                     .accountEmail((String) claims.get("accountEmail"))
                     .role((String) claims.get("role"))
                     .accountId(claims.getSubject())
                     .build();
-
+            //if rol no coincide
+            if(role.isBlank() || !jwtUserDetails.getRole().equals(role)){
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized. The role is not as expected\n");
+            }
+            return jwtUserDetails;
         } catch (Exception ex) {
             throw new RuntimeException("token is not valid");
         }

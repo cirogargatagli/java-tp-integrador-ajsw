@@ -3,7 +3,9 @@ package com.ajsw.javausersservice.controllers;
 import com.ajsw.javausersservice.models.dto.request.ClientRequest;
 import com.ajsw.javausersservice.models.dto.response.ClientResponseDto;
 import com.ajsw.javausersservice.models.dto.response.Response;
+import com.ajsw.javausersservice.models.enums.RoleEnum;
 import com.ajsw.javausersservice.services.ClientService;
+import com.ajsw.javausersservice.services.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -15,10 +17,12 @@ import java.util.List;
 @RequestMapping("/api/clients")
 public class ClientController {
     private final ClientService clientService;
+    private final JwtService jwtService;
 
     @Autowired
-    public ClientController(ClientService _clientService){
+    public ClientController(ClientService _clientService, JwtService _jwtService){
         clientService = _clientService;
+        jwtService = _jwtService;
     }
 
     @PostMapping()
@@ -31,8 +35,13 @@ public class ClientController {
     }
 
     @RequestMapping(value = "/",  method = RequestMethod.GET)
-    public List<ClientResponseDto> getClients(){
-        return clientService.getClients();
+    public List<ClientResponseDto> getClients(@RequestHeader("x-auth-token") String authToken){
+        try {
+            jwtService.validateToken(authToken, RoleEnum.Admin.name());
+            return clientService.getClients();
+        } catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error getting client .\n");
+        }
     }
 
     @RequestMapping(method = RequestMethod.GET)

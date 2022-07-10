@@ -2,13 +2,11 @@ package com.ajsw.javausersservice.services;
 
 import com.ajsw.javausersservice.models.dto.request.AccountRequest;
 import com.ajsw.javausersservice.models.dto.request.LoginRequest;
-import com.ajsw.javausersservice.models.dto.response.AccountResponseDto;
 import com.ajsw.javausersservice.models.dto.response.EntityCreatedResponse;
 import com.ajsw.javausersservice.models.dto.response.Response;
 import com.ajsw.javausersservice.models.entities.Account;
 import com.ajsw.javausersservice.repositories.interfaces.IAccountRepository;
 import com.ajsw.javausersservice.utils.AccountUtil;
-import com.ajsw.javausersservice.utils.JwtUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,14 +20,14 @@ public class AccountService {
     private final AccountUtil accountUtil;
     private final String nameEntity = "Account";
     private final ModelMapper mapper;
-    private final JwtUtils jwtUtils;
+    private final JwtService jwtService;
 
     @Autowired
-    public AccountService(IAccountRepository accountRepository, AccountUtil accountUtil, ModelMapper mapper, JwtUtils jwtUtils){
+    public AccountService(IAccountRepository accountRepository, AccountUtil accountUtil, ModelMapper mapper, JwtService jwtService){
         this.accountRepository = accountRepository;
         this.accountUtil = accountUtil;
         this.mapper = mapper;
-        this.jwtUtils = jwtUtils;
+        this.jwtService = jwtService;
     }
 
     public Response saveAccount(AccountRequest accountRequest){
@@ -43,7 +41,7 @@ public class AccountService {
         if(accountOptional.isPresent()){
             Account existingAccount = accountOptional.get();
             if (Objects.equals(loginRequest.password, existingAccount.getPassword())) {
-                return jwtUtils.generateToken(existingAccount);
+                return jwtService.generateToken(existingAccount);
             }
         }
         throw new RuntimeException("Account invalid");

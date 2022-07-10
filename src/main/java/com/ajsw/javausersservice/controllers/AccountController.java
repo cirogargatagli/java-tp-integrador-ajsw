@@ -5,7 +5,7 @@ import com.ajsw.javausersservice.models.dto.request.AccountRequest;
 import com.ajsw.javausersservice.models.dto.request.LoginRequest;
 import com.ajsw.javausersservice.models.dto.response.Response;
 import com.ajsw.javausersservice.services.AccountService;
-import com.ajsw.javausersservice.utils.JwtUtils;
+import com.ajsw.javausersservice.services.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -16,12 +16,12 @@ import org.springframework.web.server.ResponseStatusException;
 @RequestMapping("/api/accounts")
 public class AccountController {
     private final AccountService accountService;
-    private final JwtUtils jwtUtils;
+    private final JwtService jwtService;
 
     @Autowired
-    public AccountController(AccountService _accountService, JwtUtils jwtUtils){
+    public AccountController(AccountService _accountService, JwtService jwtService){
         accountService = _accountService;
-        this.jwtUtils = jwtUtils;
+        this.jwtService = jwtService;
     }
 
     @PostMapping()
@@ -40,10 +40,5 @@ public class AccountController {
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "BAD REQUEST\n");
         }
-    }
-
-    @GetMapping("/validate")
-    public JwtUserDetails validate(@RequestHeader("x-auth-token") String authToken) {
-        return jwtUtils.validateToken(authToken);
     }
 }
