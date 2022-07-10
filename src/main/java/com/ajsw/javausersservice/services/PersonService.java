@@ -4,7 +4,6 @@ import com.ajsw.javausersservice.models.dto.request.PersonRequest;
 import com.ajsw.javausersservice.models.dto.response.EntityCreatedResponse;
 import com.ajsw.javausersservice.models.dto.response.PersonResponseDto;
 import com.ajsw.javausersservice.models.dto.response.Response;
-import com.ajsw.javausersservice.models.entities.Address;
 import com.ajsw.javausersservice.models.entities.Locality;
 import com.ajsw.javausersservice.models.entities.Person;
 import com.ajsw.javausersservice.models.entities.Role;
@@ -25,13 +24,17 @@ public class PersonService {
     private final ModelMapper modelMapper;
     private final PersonUtil personUtil;
     private final String nameEntity = "Person";
+    private final ClientService clientService;
+    private final InstructorService instructorService;
 
     @Autowired
-    public PersonService(IPersonRepository personRepository, ListMapper listMapper, ModelMapper modelMapper, PersonUtil personUtil){
+    public PersonService(IPersonRepository personRepository, ListMapper listMapper, ModelMapper modelMapper, PersonUtil personUtil, ClientService clientService, InstructorService instructorService){
         this.personRepository = personRepository;
         this.listMapper = listMapper;
         this.modelMapper = modelMapper;
         this.personUtil = personUtil;
+        this.clientService = clientService;
+        this.instructorService = instructorService;
     }
 
     public Response savePerson(PersonRequest personRequest){

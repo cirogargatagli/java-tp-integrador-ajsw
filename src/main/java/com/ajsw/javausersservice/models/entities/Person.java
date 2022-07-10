@@ -10,7 +10,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "person")
-@OnDelete(action = OnDeleteAction.CASCADE)
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)

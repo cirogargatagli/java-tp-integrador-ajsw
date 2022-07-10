@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.sun.jdi.NativeMethodException;
+import org.hibernate.annotations.OnDelete;
 
 import javax.persistence.*;
 import java.math.BigInteger;
@@ -48,9 +49,7 @@ public class Course {
             foreignKey = @ForeignKey(
                     name = "fk_course_instructor",
                     foreignKeyDefinition = "FOREIGN KEY (id_instructor)\n" +
-                            "        REFERENCES instructor (id_person) MATCH SIMPLE\n" +
-                            "        ON UPDATE CASCADE\n" +
-                            "        ON DELETE CASCADE",
+                            "        REFERENCES instructor (id_person) MATCH SIMPLE\n",
                     value = ConstraintMode.CONSTRAINT
             )
     )

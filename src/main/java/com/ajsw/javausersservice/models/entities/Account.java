@@ -11,7 +11,6 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "account")
-@OnDelete(action = OnDeleteAction.CASCADE)
 public class Account implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
