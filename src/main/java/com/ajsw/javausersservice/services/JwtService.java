@@ -21,7 +21,7 @@ public class JwtService {
     public String generateToken(Account account) {
         Claims claims = Jwts.claims().setSubject(Integer.toString(account.getIdAccount()));
         claims.setIssuedAt(new Date(System.currentTimeMillis()));
-        claims.setExpiration(new Date(System.currentTimeMillis() + (300 * 2000)));
+        claims.setExpiration(new Date(System.currentTimeMillis() + (1000*60*60*2)));
         claims.put("accountEmail", account.getEmail());
         claims.put("role", account.getRole().getDescription());
         return Jwts.builder()
