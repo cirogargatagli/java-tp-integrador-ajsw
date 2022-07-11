@@ -32,7 +32,8 @@ public class JwtService {
 
     public JwtUserDetails validateToken(String authToken, String role) {
         try {
-            Claims claims = Jwts.parser().setSigningKey(signedKey).parseClaimsJws(authToken).getBody();
+            String[] token = authToken.split("\"");
+            Claims claims = Jwts.parser().setSigningKey(signedKey).parseClaimsJws(token[1]).getBody();
             Date expireTime = claims.getExpiration();
 
             if (expireTime.before(new Date(System.currentTimeMillis()))) {

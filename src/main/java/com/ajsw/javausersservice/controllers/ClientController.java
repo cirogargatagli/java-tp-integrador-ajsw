@@ -35,7 +35,7 @@ public class ClientController {
     }
 
     @RequestMapping(value = "/",  method = RequestMethod.GET)
-    public List<ClientResponseDto> getClients(@RequestHeader("x-auth-token") String authToken){
+    public List<ClientResponseDto> getClients(@RequestHeader(value = "Authorization") String authToken){
         try {
             jwtService.validateToken(authToken, RoleEnum.Admin.name());
             return clientService.getClients();
